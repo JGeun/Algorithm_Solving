@@ -1,4 +1,4 @@
-package Heewook;
+package BOJ.Heewook;
 
 public class HelloWorld {
 

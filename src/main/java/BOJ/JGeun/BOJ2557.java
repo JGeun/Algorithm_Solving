@@ -1,4 +1,4 @@
-package JGeun;
+package BOJ.JGeun;
 
 class BOJ2557 {
 	public static void main(String[] args) {
