@@ -1,5 +1,6 @@
 package BOJ.JGeun.p1700;
 
+
 import java.util.*;
 
 class BOJ1700{
