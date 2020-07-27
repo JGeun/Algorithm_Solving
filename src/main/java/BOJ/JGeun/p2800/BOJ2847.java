@@ -1,6 +1,6 @@
 package BOJ.JGeun.p2800;
 
-import java.util.*;
+import java.util.Scanner;
 
 public class BOJ2847 {
 	public static void main(String[] args) {
