@@ -1,5 +1,7 @@
 package BOJ.JGeun.p1700;
 
+import java.util.*;
+
 class BOJ1700{
   public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
