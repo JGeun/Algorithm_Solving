@@ -2,7 +2,7 @@ package BOJ.Heewook.basic;
 
 import java.util.Scanner;
 
-public class While1110 {
+public class DoWhile1110 {
   public static void main(String[] args) throws Exception {
     Scanner sc = new Scanner(System.in);
     int target = sc.nextInt();
