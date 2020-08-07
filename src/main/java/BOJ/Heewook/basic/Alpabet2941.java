@@ -10,8 +10,15 @@ public class Alpabet2941 {
 
     Scanner scanner = new Scanner(System.in);
     String word = scanner.nextLine();
-    System.out.println(recursive(word, 0));
+    // System.out.println(recursive(word, 0));
+    System.out.println(find(word));
     scanner.close();
+  }
+
+  private static int find(String word) {
+    for (int i = 0; i < alpabet.length; i++)
+      word = word.replaceAll(alpabet[i], "a");
+    return word.length();
   }
 
   private static int recursive(final String word, int index) {
