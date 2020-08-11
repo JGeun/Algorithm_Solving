@@ -22,6 +22,6 @@ public class String2908 {
 
     }
     System.out.println(max);
-    sc.close();
+    scanner.close();
   }
 }
