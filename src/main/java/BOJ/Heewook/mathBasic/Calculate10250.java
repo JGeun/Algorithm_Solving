@@ -11,5 +11,4 @@ public class Calculate10250 {
       System.out.println((n % h + 1) * 100 + (n / h + 1));
     }
   }
-
 }
