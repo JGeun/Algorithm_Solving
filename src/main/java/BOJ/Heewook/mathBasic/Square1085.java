@@ -2,7 +2,7 @@ package BOJ.Heewook.mathBasic;
 
 import java.util.Scanner;
 
-public class Square {
+public class Square1085 {
 
   public static void main(String[] args) {
 
