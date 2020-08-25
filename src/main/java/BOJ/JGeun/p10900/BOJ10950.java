@@ -1,6 +1,6 @@
 package BOJ.JGeun.p10900;
 
-import java.util.*;
+import java.util.Scanner;
 
 public class BOJ10950 {
 	public static void main(String[] args){
