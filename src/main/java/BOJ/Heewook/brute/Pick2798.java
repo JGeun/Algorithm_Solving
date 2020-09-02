@@ -1,6 +1,5 @@
 package BOJ.Heewook.brute;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Pick2798 {
@@ -12,27 +11,17 @@ public class Pick2798 {
     int[] cards = new int[n];
     for (int i = 0; i < n; i++)
       cards[i] = scanner.nextInt();
-    System.out.println(recursive(m, cards, new ArrayList<Integer>()));
+    System.out.println(recursive(m, cards, -1, 0, 0));
+    scanner.close();
   }
 
-  private static int recursive(final int limit, final int[] cards, ArrayList<Integer> picked) {
-    if (picked.size() == 3)
-      return calculate(limit, picked);
+  private static int recursive(final int limit, final int[] cards, int past, int sum, int count) {
+    if (count == 3)
+      return sum <= limit ? sum : -1;
     int ret = 0;
-    for (int i = 0; i < cards.length; i++) {
-      if (!picked.contains(cards[i])) {
-        picked.add(cards[i]);
-        ret = Math.max(ret, recursive(limit, cards, picked));
-        picked.remove(picked.size() - 1);
-      }
-    }
+    for (int i = past + 1; i < cards.length; i++)
+      ret = Math.max(ret, recursive(limit, cards, i, sum + cards[i], count + 1));
     return ret;
   }
 
-  private static int calculate(int limit, ArrayList<Integer> list) {
-    int sum = 0;
-    for (int i = 0; i < list.size(); i++)
-      sum += list.get(i);
-    return sum <= limit ? sum : -1;
-  }
 }
