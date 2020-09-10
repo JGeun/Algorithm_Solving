@@ -12,15 +12,15 @@ public class Sort1181 {
 
     Scanner sc = new Scanner(System.in);
     int n = sc.nextInt();
-    Set<String> list = new TreeSet<>((s1, s2) -> {
+    Set<String> l = new TreeSet<>((s1, s2) -> {
       if (s1.length() != s2.length())
         return s1.length() - s2.length();
       else
         return s1.compareTo(s2);
     });
     for (int i = 0; i < n; i++)
-      list.add(sc.next());
-    for (String s : list)
+      l.add(sc.next());
+    for (String s : l)
       System.out.println(s);
   }
 }
