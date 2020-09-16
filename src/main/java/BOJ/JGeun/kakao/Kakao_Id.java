@@ -1,8 +1,8 @@
 package BOJ.JGeun.kakao;
 
-public class Id {
+public class Kakao_Id {
 	public static void main(String[] args) {
-		System.out.println(new Id().solution("..eeqweweadd.12.."));
+		System.out.println(new Kakao_Id().solution(".../qwefafsdfadsfadsf-.."));
 	}
 	public String solution(String new_id) {
         String answer = getId(new_id);
