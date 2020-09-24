@@ -5,6 +5,9 @@ import java.util.Scanner;
 
 public class Operator14888 {
 
+  static int max = Integer.MIN_VALUE;
+  static int min = Integer.MAX_VALUE;
+
   public static void main(String[] args) {
 
     Scanner scanner = new Scanner(System.in);
@@ -30,9 +33,37 @@ public class Operator14888 {
             operators.add('/');
         }
     }
-    for (char c : operators)
-      System.out.println(c);
+    find(0, numbers[0], numbers, operators, new boolean[n - 1]);
+    System.out.println(max);
+    System.out.println(min);
     scanner.close();
+  }
+
+  private static void find(int n, int now, final int[] numbers, ArrayList<Character> operators, boolean[] used) {
+    if (n == numbers.length - 1) {
+      max = Math.max(max, now);
+      min = Math.min(min, now);
+      return;
+    }
+    for (int i = 0; i < operators.size(); i++) {
+      if (used[i])
+        continue;
+      used[i] = true;
+      switch (operators.get(i)) {
+        case '+':
+          find(n + 1, now + numbers[n + 1], numbers, operators, used);
+          break;
+        case '-':
+          find(n + 1, now - numbers[n + 1], numbers, operators, used);
+          break;
+        case '*':
+          find(n + 1, now * numbers[n + 1], numbers, operators, used);
+          break;
+        case '/':
+          find(n + 1, now / numbers[n + 1], numbers, operators, used);
+      }
+      used[i] = false;
+    }
   }
 
 }
