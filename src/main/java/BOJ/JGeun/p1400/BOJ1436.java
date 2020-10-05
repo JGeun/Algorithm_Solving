@@ -12,12 +12,12 @@ public class BOJ1436 {
 			int count=1;
 			do{
 				String strN=String.valueOf(front).concat(find);
-				int blank=0; //666Ã£Àº µÚ ³²Àº °ø°£ÀÇ °³¼ö
+				int blank=0; //666Ã£ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				for(int i=0; i<strN.length()-2; i++){
-					String subN=strN.substring(i,i+3); //3±ÛÀÚ
+					String subN=strN.substring(i,i+3); //3ï¿½ï¿½ï¿½ï¿½
 					if(subN.equals(find)){
 						blank = (strN.length()-1)-(i+2);	
-						strN = strN.substring(0,i+3); //666Ã£ÀºÄ­±îÁö ³Ö±â
+						strN = strN.substring(0,i+3); //666Ã£ï¿½ï¿½Ä­ï¿½ï¿½ï¿½ï¿½ ï¿½Ö±ï¿½
 						break;
 					}	
 				}
