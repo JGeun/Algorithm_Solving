@@ -1,5 +1,7 @@
 package BOJ.JGeun.p1400;
 
+import java.util.Scanner;
+
 public class BOJ1436 {
 	static int N;
 	static void findNumPrint(){
