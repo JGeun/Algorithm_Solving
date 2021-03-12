@@ -26,3 +26,4 @@ package-lock.json
 *.tar.gz
 *.rar
 hs_err_pid*
+goorm.manifest
