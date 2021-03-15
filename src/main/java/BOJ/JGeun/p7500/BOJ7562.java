@@ -10,8 +10,8 @@ public class BOJ7562 {
     private static int[][] map;
     private static int[] pos = new int[2];
     private static int[] goal = new int[2];
-    private static int[] dx = {-1, 1, 2, 2, 1, -1, -2, -2};
-    private static int[] dy = {-2, 2, 1, -1, -2, -2, -1, 1};
+    private static int[] dx = {-2, -1, 1, 2, 2, 1, -1, -2};
+    private static int[] dy = {1, 2, 2, 1, -1, -2, -2, -1};
     private static int count = Integer.MAX_VALUE;
 
     public static void main(String[] args){
@@ -26,8 +26,6 @@ public class BOJ7562 {
             pos[0] = sc.nextInt(); pos[1] = sc.nextInt();
             goal[0] = sc.nextInt(); goal[1] = sc.nextInt();
             bfs(pos[1], pos[0], 0);
-
-
             System.out.println(count);
         }
     }
