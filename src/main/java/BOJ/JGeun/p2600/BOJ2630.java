@@ -17,7 +17,7 @@ public class BOJ2630 {
                 map[i][j] = sc.nextInt();
             }
         }
-        //테스트
+        //테스트123
         cutPaper(0, 0, N);
         System.out.println(white);
         System.out.println(blue);
