@@ -1,69 +1,68 @@
 package BOJ.JGeun.p2600;
 
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class BOJ2630 {
-    public static int white = 0;
-    public static int blue = 0;
-    public static int[][] map;
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static StringTokenizer st;
+    static StringBuilder sb = new StringBuilder("");
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int N = sc.nextInt();
+    static int N, wCnt=0, bCnt=0;
+    static int[][] board;
 
-        map = new int[N][N];
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                map[i][j] = sc.nextInt();
-            }
+    static void input() throws IOException {
+        N = Integer.parseInt(br.readLine());
+        board = new int[N][N];
+        for(int i=0; i<N; i++){
+            st = new StringTokenizer(br.readLine());
+            for(int j=0; j<N; j++)
+                board[i][j] = Integer.parseInt(st.nextToken());
         }
-        //Å×½ºÆ®1234
-        cutPaper(0, 0, N);
-        System.out.println(white);
-        System.out.println(blue);
     }
 
-    public static void cutPaper(int y, int x, int n) {
-        n /= 2;
-        if (n == 1) {
-            for(int i=0; i<2; i++){
-                for(int j=0; j<2; j++){
-                    if (map[y+i][x+j] == 1)
-                        blue += 1;
-                    else
-                        white += 1;
-                }
-            }
+    static void process(){
+        checkBoard(0, 0, N);
+    }
+
+    static void checkBoard(int x, int y, int size){
+        if(size == 0) return;
+        if(isAllSameColor(x, y, size, board[x][y])){
+            if(board[x][y] == 1) bCnt+=1;
+            else wCnt += 1;
             return;
         }
-
-        for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < 2; j++) {
-                int color = getWhatColor(y + n * i, x + n * j, n);
-                if (color == 1) {
-                    blue += 1;
-                } else if (color == 0) {
-                    white += 1;
-                } else {
-                    cutPaper(y + n * i, x + n * j, n);
-                }
-            }
-        }
+        checkBoard(x,y,size/2);
+        checkBoard(x+size/2, y, size/2);
+        checkBoard(x, y+size/2, size/2);
+        checkBoard(x+size/2, y+size/2, size/2);
     }
 
-    public static int getWhatColor(int y, int x, int n) {
-        int color;
-        if (map[y][x] == 1)
-            color = 1;
-        else
-            color = 0;
-
-        for (int i = y; i < y + n; i++) {
-            for (int j = x; j < x + n; j++) {
-                if (color != map[i][j])
-                    return -1;
-            }
+    static boolean isAllSameColor(int x, int y, int size, int color){
+        for(int i=x; i<x+size; i++){
+            for(int j=y; j<y+size; j++)
+                if(board[i][j] != color) return false;
         }
-        return color;
+        return true;
+    }
+
+    public static void main(String[] args) throws IOException {
+        input();
+        process();
+        sb.append(wCnt).append('\n').append(bCnt);
+        System.out.println(sb);
+    }
+
+    static class Node implements Comparable<Node>{
+        int idx, weight;
+
+        Node(int _to, int _weight){
+            this.idx = _to; this.weight = _weight;
+        }
+
+        @Override
+        public int compareTo(Node n){
+            return this.weight - n.weight;
+        }
     }
 }
