@@ -3,7 +3,7 @@ package BOJ.JGeun.p1700;
 
 import java.util.*;
 
-class BOJ1700{
+public class BOJ1773{
   public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int N = sc.nextInt(), C=sc.nextInt();
