@@ -6,7 +6,6 @@ class Solution {
         return gcd(b, a%b);
     }
     public int gcm(int a, int b){
-        int big, small;
         return a > b ? a*b/gcd(a,b) : a*b/gcd(b,a);
     }
     public int solution(int[] arr) {
