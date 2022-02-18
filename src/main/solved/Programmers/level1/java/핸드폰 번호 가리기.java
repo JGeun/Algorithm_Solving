@@ -1,4 +1,4 @@
-package Programmers.level1;
+package Programmers.level1.java;
 
 class Solution {
     public String solution(String phone_number) {

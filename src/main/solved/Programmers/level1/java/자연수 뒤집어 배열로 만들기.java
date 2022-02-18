@@ -1,4 +1,4 @@
-package Programmers.level1;
+package Programmers.level1.java;
 
 //기본 문제풀이
 class Solution {

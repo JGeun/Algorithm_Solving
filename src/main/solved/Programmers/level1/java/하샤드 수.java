@@ -1,4 +1,4 @@
-package Programmers.level1;
+package Programmers.level1.java;
 
 class Solution {
     public boolean solution(int x) {

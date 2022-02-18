@@ -1,4 +1,4 @@
-package Programmers.level2;
+package Programmers.level2.java;
 
 class Solution {
     public int gcd(int a, int b){
