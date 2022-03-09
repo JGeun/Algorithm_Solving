@@ -3,7 +3,7 @@ package BOJ.p23200;
 import java.io.*;
 import java.util.*;
 
-public class BOJ23291 {
+public class BOJ23291_array {
     private static int[][] block;
     private static int N, K;
 
