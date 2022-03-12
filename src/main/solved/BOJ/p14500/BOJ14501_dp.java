@@ -3,7 +3,7 @@ package BOJ.p14500;
 import java.io.*;
 import java.util.*;
 
-public class BOJ14501 {
+public class BOJ14501_dp {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static StringTokenizer st;
     static StringBuilder sb = new StringBuilder("");
