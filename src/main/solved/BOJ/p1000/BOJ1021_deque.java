@@ -2,7 +2,7 @@ package BOJ.p1000;
 
 import java.util.*;
 
-public class BOJ1021 {
+public class BOJ1021_deque {
     public static void main (String[] args){
         Scanner sc = new Scanner(System.in);
         int N = sc.nextInt(), M = sc.nextInt();
