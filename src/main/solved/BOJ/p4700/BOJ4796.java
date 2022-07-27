@@ -11,13 +11,13 @@ public class Main {
 
         while(true) {
             StringTokenizer st = new StringTokenizer(br.readLine());
-            int P = Integer.parseInt(st.nextToken());
             int L = Integer.parseInt(st.nextToken());
+            int P = Integer.parseInt(st.nextToken());
             int V = Integer.parseInt(st.nextToken());
 
-            if (P == 0 && L == 0 && V == 0) break;
+            if (L == 0 && P == 0 && V == 0) break;
 
-            int result = V/L*P + Math.min(V % L, P);
+            int result = (V/P)*L + Math.min(V % P, L);
             sb.append("Case ").append(caseIdx).append(": ").append(result).append('\n');
             caseIdx+=1;
         }
