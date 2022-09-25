@@ -1,74 +1,95 @@
 import java.util.*;
-class Solution {
-    private ArrayList<ArrayList<Path>> pathList = new ArrayList();
-    private boolean[] isGate, isSummit, isVisited;
-    private int[] answer = new int[]{Integer.MAX_VALUE, Integer.MAX_VALUE};
-    PriorityQueue<Path> pq = new PriorityQueue<>();
-    public int[] solution(int n, int[][] paths, int[] gates, int[] summits) {
-        init(n, paths, gates, summits);
-        Arrays.sort(summits);
 
-        for (int i=0; i<summits.length; i++) {
-            pq.clear();
-            isVisited = new boolean[n+1];
-            int res = findIntensity(summits[i]);
-            if (answer[1] > res) {
-                answer[0] = summits[i];
-                answer[1] = res;
+class Solution {
+    private List<List<Node>> graph = new ArrayList();
+
+    public int[] solution(int n, int[][] paths, int[] gates, int[] summits) {
+        for (int i=0; i<n+1; i++) {
+            graph.add(new ArrayList());
+        }
+
+        for (int[] path : paths) {
+            int s = path[0];
+            int e = path[1];
+            int w = path[2];
+
+            if (isGate(s, gates) || isSummit(e, summits)) {
+                graph.get(s).add(new Node(e,w));
+            } else if (isGate(e, gates) || isSummit(s, summits)) {
+                graph.get(e).add(new Node(s, w));
+            } else {
+                graph.get(s).add(new Node(e, w));
+                graph.get(e).add(new Node(s, w));
             }
         }
-        return answer;
+
+        return dijkstra(n, gates, summits);
     }
 
-    private int findIntensity(int start) {
-        pq.add(new Path(start, 0));
-        int intensity = -1;
+    private int[] dijkstra(int n, int[] gates, int[] summits) {
+        Queue<Node> q = new LinkedList();
+        int[] intensity = new int[n+1];
 
-        while (!pq.isEmpty()) {
-            Path path = pq.poll();
-            if(isVisited[path.pos]) continue;
-            isVisited[path.pos] = true;
-            intensity = Math.max(intensity, path.intensity);
+        Arrays.fill(intensity, Integer.MAX_VALUE);
 
-            if (isGate[path.pos]) return intensity;
+        for (int gate : gates) {
+            q.add(new Node(gate, 0));
+            intensity[gate] = 0;
+        }
 
-            for (Path nextPath : pathList.get(path.pos)) {
-                if(!isSummit[nextPath.pos] && !isVisited[nextPath.pos]) {
-                    pq.add(nextPath);
+        while (!q.isEmpty()) {
+            Node cn = q.poll();
+
+            if (cn.w < intensity[cn.e]) continue;
+
+            for (int i=0; i<graph.get(cn.e).size(); i++) {
+                Node nn = graph.get(cn.e).get(i);
+
+                int dis = Math.max(intensity[cn.e], nn.w);
+                if (intensity[nn.e] > dis) {
+                    intensity[nn.e] = dis;
+                    q.add(new Node(nn.e, dis));
                 }
             }
         }
-        return intensity;
-    }
 
-    private void init(int n, int[][] paths, int[] gates, int[] summits) {
-        isGate = new boolean[n+1];
-        isSummit = new boolean[n+1];
+        int mn = Integer.MAX_VALUE;
+        int mw = Integer.MAX_VALUE;
 
-        for(int gate : gates)
-            isGate[gate] = true;
-        for (int summit : summits)
-            isSummit[summit] = true;
+        Arrays.sort(summits);
 
-        for (int i=0; i<=n; i++) pathList.add(new ArrayList());
-        for (int i=0; i<paths.length; i++) {
-            pathList.get(paths[i][0]).add(new Path(paths[i][1], paths[i][2]));
-            pathList.get(paths[i][1]).add(new Path(paths[i][0], paths[i][2]));
-        }
-    }
-
-    class Path implements Comparable<Path>{
-        int pos, intensity;
-
-        public Path(int pos, int intensity) {
-            this.pos = pos;
-            this.intensity = intensity;
+        for (int summit : summits) {
+            if (intensity[summit] < mw) {
+                mn = summit;
+                mw = intensity[summit];
+            }
         }
 
-        @Override
-        public int compareTo(Path p) {
-            if(this.intensity != p.intensity) return this.intensity - p.intensity;
-            return this.pos - p.pos;
+        return new int[] {mn, mw};
+    }
+
+    // num이 입구인지 확인
+    private boolean isGate(int num, int[] gates) {
+        for (int gate : gates) {
+            if (num == gate) return true;
+        }
+        return false;
+    }
+
+    // num이 산봉우리인지 확인
+    private boolean isSummit(int num, int[] submits) {
+        for (int submit : submits) {
+            if (num == submit) return true;
+        }
+        return false;
+    }
+
+    class Node {
+        int e, w;
+
+        Node (int e, int w) {
+            this.e = e;
+            this.w = w;
         }
     }
 }
