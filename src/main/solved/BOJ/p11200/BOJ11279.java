@@ -1,18 +1,22 @@
-package BOJ.p11200;
-
+import java.io.*;
 import java.util.*;
 
-public class BOJ11279 {
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		int n = sc.nextInt();
-		PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
-		
-		for(int i=0; i<n; i++) {
-			int num = sc.nextInt();
-			pq.add(num);
-			if(num == 0)
-				System.out.println(pq.poll());
+public class Main {
+
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringBuilder sb = new StringBuilder();
+		PriorityQueue<Integer> pq = new PriorityQueue(Collections.reverseOrder());
+
+		int N = Integer.parseInt(br.readLine());
+		while(N-->0) {
+			int num = Integer.parseInt(br.readLine());
+			if (num == 0) {
+				sb.append(!pq.isEmpty() ? pq.poll() : 0).append("\n");
+			} else {
+				pq.offer(num);
+			}
 		}
+		System.out.print(sb.toString());
 	}
 }
