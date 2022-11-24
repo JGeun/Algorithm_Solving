@@ -1,6 +1,11 @@
 import java.io.*;
 import java.util.*;
 
+/**
+ * <접근 방법>
+ * 탐욕법으로 접근할 수 없고 최솟값을 찾아야 함으로 BFS로 접근했습니다.
+ * 기존에 방문했던 층이라면 탐색할 필요가 없기에 visited 변수로 처리했습니다.
+ */
 public class Main {
 
     private static int F, G, S, U, D;
