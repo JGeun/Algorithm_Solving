@@ -1,37 +1,48 @@
-package BOJ.p9600;
+import java.io.*;
 
-import java.util.Scanner;
+public class Main {
 
-public class BOJ9663 {
-	static boolean[] flag_a;
-	static boolean[] flag_b;
-	static boolean[] flag_c;
-	static int[] pos;
-	static int count = 0;
-	
-	public static void main(String[] args){
-		Scanner sc= new Scanner(System.in);
-		int N = sc.nextInt();
-		pos = new int[N];
-		flag_a = new boolean[N];
-		flag_b = new boolean[N*2-1];
-		flag_c = new boolean[N*2-1];
-		set(N, 0);
-		System.out.println(count);
+	private static int N, ans = 0;
+	private static int[] cols;
+	private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+	public static void main(String[] args) throws IOException {
+		input();
+		solve(0);
+		System.out.println(ans);
 	}
-	static void set(int N, int i) {
-		for(int j=0; j<N; j++) {
-			if(flag_a[j] == false && flag_b[i+j] == false && flag_c[i-j+N-1] == false) {
-				pos[i] = j;
-				if(i == N-1) {
-					count+=1;
-				}
-				else {
-					flag_a[j] = flag_b[i+j] = flag_c[i-j+N-1] = true;
-					set(N, i+1);
-					flag_a[j] = flag_b[i+j] = flag_c[i-j+N-1] = false;
-				}
-			}
+
+	private static void solve(int row) {
+		if (row == N) {
+			ans += 1;
+			return;
 		}
+
+		for (int col=0; col<N; col++) {
+			boolean isPossible = true;
+
+			for (int i=0; i<row; i++) {
+				if (!isAttackable(row, col, i, cols[i])) continue;
+				isPossible = false;
+				break;
+			}
+
+			if (!isPossible) continue;
+
+			cols[row] = col;
+			solve(row+1);
+			cols[row] = 0;
+		}
+	}
+
+	private static boolean isAttackable(int r1, int c1, int r2, int c2) {
+		if (c1 == c2) return true;
+		if (r1 - c1 == r2 - c2) return true;
+		return r1 + c1 == r2 + c2;
+	}
+
+	private static void input() throws IOException {
+		N = Integer.parseInt(br.readLine());
+		cols = new int[N];
 	}
 }
