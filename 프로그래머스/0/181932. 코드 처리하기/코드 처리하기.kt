@@ -5,15 +5,10 @@ class Solution {
         val sb = StringBuilder()
         var mode = 0
         
-        for (i in 0 until code.length) {
-            val ch = code[i]
-            if (ch == '1') {
-                mode = if (mode == 0) 1 else 0
-                continue
-            }
-            
-            if (i % 2 == mode) {
-                sb.append(ch)
+        code.forEachIndexed { index, ch ->
+            if(ch == '1') mode = mode xor 1
+            else if (index % 2 == mode) {
+                sb.append(ch);
             }
         }
         
