@@ -1,10 +1,10 @@
 # [level 0] 주사위 게임 3 - 181916 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181916?language=kotlin) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181916?language=java) 
 
 ### 성능 요약
 
-메모리: 65.8 MB, 시간: 29.56 ms
+메모리: 85.1 MB, 시간: 0.15 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2025년 01월 07일 23:27:03
+2025년 01월 07일 23:41:09
 
 ### 문제 설명
 
