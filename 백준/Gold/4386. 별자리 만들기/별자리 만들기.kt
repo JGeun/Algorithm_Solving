@@ -1,4 +1,5 @@
-import kotlin.math.min
+import java.util.*
+import kotlin.collections.*
 
 // 1. 별 x,y 등록
 // 2. 각 별들의 dist를 저장하는 List 생성
@@ -8,70 +9,52 @@ fun main(args: Array<String>) = with(System.`in`.bufferedReader()) {
     val n = readLine().toInt()
     val stars = mutableListOf<Star>()
 
-    repeat(n) { index ->
-        val (x, y) = readLine().split(" ").map { it.toFloat() * 100 }.map { it.toInt() }
-        stars.add(Star(index, x, y))
+    repeat(n) {
+        val (x, y) = readLine().split(" ").map { it.toDouble() }
+        stars.add(Star(x, y))
     }
 
-    val distAdj = Array(n) { mutableListOf<Dist>() }
-    for (i in 0 until n) {
-        val star = stars[i]
-        for (j in 0 until n) {
-            if (i == j) continue
-            val weight = calcWeight(star, stars[j])
-            distAdj[i].add(Dist(j, weight))
-            distAdj[j].add(Dist(i, weight))
-        }
-    }
+
 
     // 첫 번째 별을 기준으로 탐색 시작
-    val queue = ArrayDeque<Int>(n)
-    queue.add(0)
+    val pq = PriorityQueue<Dist>(compareBy { it.weight })
+    val visited = BooleanArray(n) { false }
+    var res = 0.0
+    var count = 0
 
-    val weightArr = IntArray(n) { Int.MAX_VALUE }
-    weightArr[0] = 0
+    pq.add(Dist(0, 0.0))
 
-    val visited = BooleanArray(n)
-    visited[0] = true
+    while (pq.isNotEmpty()) {
+        val (curIdx, weight) = pq.poll()
 
-    var res = 0
-    while (true) {
-        val idx = queue.removeFirst()
+        if (visited[curIdx]) continue
+        visited[curIdx] = true
+        res += weight
+        count++
 
-        for (dist in distAdj[idx]) {
-            if (weightArr[dist.starIdx] < dist.weight) continue
-            weightArr[dist.starIdx] = dist.weight
-        }
+        if (count == n) break // 모든 정점을 방문하면 종료
 
-        var minWeightIdx = -1
-        for (i in 0 until n) {
-            if (visited[i]) continue
-            if (weightArr[i] == Int.MAX_VALUE) continue
-            if (minWeightIdx == -1) minWeightIdx = i
-            if (weightArr[minWeightIdx] > weightArr[i]) {
-                minWeightIdx = i
+        for (next in 0 until n) {
+            if (!visited[next]) {
+                val dist = calcWeight(stars[curIdx], stars[next])
+                pq.add(Dist(next, dist))
             }
         }
-        if (minWeightIdx == -1) break
-        visited[minWeightIdx] = true
-        res += weightArr[minWeightIdx]
-        queue.add(minWeightIdx)
     }
 
-    println(res.toFloat()/100)
+    println(String.format("%.2f", res)) // 소수점 둘째 자리까지 출력
 }
 
-fun calcWeight(star1: Star, star2: Star): Int {
-    return Math.sqrt(Math.pow((star1.x - star2.x).toDouble(), 2.0) + Math.pow((star1.y - star2.y).toDouble(), 2.0)).toInt()
+fun calcWeight(star1: Star, star2: Star): Double {
+    return Math.sqrt(Math.pow((star1.x - star2.x), 2.0) + Math.pow((star1.y - star2.y), 2.0))
 }
 
 data class Star(
-    val idx: Int,
-    val x: Int,
-    val y: Int
+    val x: Double,
+    val y: Double
 )
 
 data class Dist(
     val starIdx: Int,
-    val weight: Int
+    val weight: Double
 )
